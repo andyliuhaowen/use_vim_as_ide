@@ -218,8 +218,8 @@ Both kinds of plugins can be difficult to uninstall and update, so some people m
 
 We are starting right from here. Note that this guide is sequence-sensitive. Please read from start to end.
 
-<h2 name="1">1 源码安装编辑器 vim</h2>
-发行套件的软件源中预编译的 vim 要么不是最新版本，要么功能有阉割，有必要升级成全功能的最新版，当然，源码安装必须滴：
+<h2 name="1">1 Install vim from source</h2>
+The vim provided by distros are either older versions or has various functions disabled. It is necessary for us to use the full and latest version of vim. In order to install from source:
 ```
 git clone git@github.com:vim/vim.git
 cd vim/
@@ -227,12 +227,12 @@ cd vim/
 make
 make install
 ```
-其中，--enable-pythoninterp、--enable-rubyinterp、--enable-perlinterp、--enable-luainterp 等分别表示支持 ruby、python、perl、lua 编写的插件，--enable-gui=gtk2 表示生成采用 GNOME2 风格的 gvim，--enable-cscope 支持 cscope，--with-python-config-dir=/usr/lib/python2.7/config/ 指定 python 路径（先自行安装 python 的头文件 python-devel），这几个特性非常重要，影响后面各类插件的使用。注意，你得预先安装相关依赖库的头文件，python-devel、python3-devel、ruby-devel、lua-devel、libX11-devel、gtk-devel、gtk2-devel、gtk3-devel、ncurses-devel，如果缺失，源码构建过程虽不会报错，但最终生成的 vim 很可能缺失某些功能。构建完成后在 vim 中执行
+In the above command, `--enable-pythoninterp`、`--enable-rubyinterp`、`--enable-perlinterp`、`--enable-luainterp` respectively enables support for plugins written in ruby, python, perl, and lua. `--enable-gui=gtk2` will produce a GNOME2-styled gvim. `--enable-cscope` provides support for cscope. `--with-python-config-dir=/user/lib/pyhthon2.7/config` specifies path to the python executable. Those features are crucially important as various following plugins depend on them. Note: you have to first install header files for those dependencies such as `python-devel`, `python3-devel`, `ruby-devel`, `lua-devel`, `libX11-devel`, `gtk-devel`, `gtk2-devel`, `gtk3-devel`, `ncurses-devel`. If those are missing, the compiling process will not report errors but the compiled vim will not have some of the features you enabled. When the build is finished, run the following in vim.
 
 ```
 :echo has('python')
 ```
-若输出 1 则表示构建出的 vim 已支持 python，反之，0 则不支持。
+If the output is 1, the compiled vim has support for python. If it says 0, it does not have support for python.
 
 <h2 name="2">2 插件管理</h2>
 既然本文主旨在于讲解如何通过插件将 vim 打造成中意的 C/C++ IDE，那么高效管理插件是首要解决的问题。
