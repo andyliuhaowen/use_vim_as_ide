@@ -35,13 +35,13 @@ yangyangwithgnu@yeah.net
 [0 Vim Must-knows ](#0)  
 ........[0.1 The .vimrc File ](#0.1)  
 ........[0.2 The .vim/ Directory ](#0.2)  
-[1 源码安装编辑器 vim ](#1)  
-[2 插件管理 ](#2)  
-[3 界面美化 ](#3)  
-........[3.1 主题风格 ](#3.1)  
-........[3.2 营造专注氛围 ](#3.2)  
-........[3.3 添加辅助信息 ](#3.3)  
-........[3.4 其他 ](#3.4)  
+[1 Installing vim from source ](#1)  
+[2 Plugin management ](#2)  
+[3 User interface ](#3)  
+........[3.1 Theme ](#3.1)  
+........[3.2 Building a focused environment ](#3.2)  
+........[3.3 Add assistive information ](#3.3)  
+........[3.4 Others ](#3.4)  
 [4 代码分析 ](#4)  
 ........[4.1 语法高亮 ](#4.1)  
 ........[4.2 代码缩进 ](#4.2)  
@@ -218,7 +218,7 @@ Both kinds of plugins can be difficult to uninstall and update, so some people m
 
 We are starting right from here. Note that this guide is sequence-sensitive. Please read from start to end.
 
-<h2 name="1">1 Install vim from source</h2>
+<h2 name="1">1 Installing vim from source</h2>
 The vim provided by distros are either older versions or has various functions disabled. It is necessary for us to use the full and latest version of vim. In order to install from source:
 ```
 git clone git@github.com:vim/vim.git
@@ -330,123 +330,124 @@ We need to be careful about the source of our plugins. GitHub usually has many p
 
 After starting to use vundle to manage plugins, do not install plugins with anything else, like a package manager with your distro. Otherwise they will mess up our `.vim/` directory.
 
-<h2 name="3">3 界面美化</h2>
-玉不琢不成器，vim 不配不算美。刚安装好的 vim 朴素得吓人，这是与我同时代的软件么？
+<h2 name="3">3 User interface</h2>
+An unpolished jade is never of good use. The default vim interface is stunningly simple (ugly). Is this even a modern software?
 <div align="center">
 <img src="https://github.com/yangyangwithgnu/use_vim_as_ide/blob/master/pics/%E9%BB%98%E8%AE%A4%20vim%20%E7%95%8C%E9%9D%A2.png" alt=""/><br />
-（默认 vim 界面）
+（the default vim interface）
 </div>
-就我的审美观而言，至少有几个问题：语法高亮太单薄、主题风格太简陋、窗口元素太冗余、辅助信息太欠缺。
+At least for me, it has several problems: its syntax highlighting is not colorful; its theme is too primitive; it contains unnecessary UI elements; it lacks assistive information. 
 
-<h3 name="3.1">3.1 主题风格</h3>
-一套好的配色方案绝对会影响你的编码效率，vim 内置了 10 多种配色方案供你选择，GUI 下，可以通过菜单（Edit -> Color Scheme）试用不同方案，字符模式下，需要你手工调整配置信息，再重启 vim 查看效果（csExplorer 插件，可在字符模式下不用重启即可查看效果）。不满意，可以去 http://vimcolorschemetest.googlecode.com/svn/html/index-c.html 慢慢选。我自认为“阅美无数”，目前最夯三甲：
-* 素雅 solarized（https://github.com/altercation/vim-colors-solarized ）
-* 多彩 molokai（https://github.com/tomasr/molokai ）
-* 复古 phd（http://www.vim.org/scripts/script.php?script_id=3139 ）
+<h3 name="3.1">3.1 Theme</h3>
+A good color scheme can definitely improve your coding efficiency. Vim comes with more than 10 color schemes for you to choose from. Under GUI, you can try out different color schemes through (Edit -> Color Scheme). Under text environment, you need to manually adjust configuration and restart vim. (csExplorer plugin enables you to see the change without restarting vim).If you are not satisfied, you can go to http://vimcolorschemetest.googlecode.com/svn/html/index-c.html to see them in action. I've seen many color themes and I think these are the best three:
+* solarized（https://github.com/altercation/vim-colors-solarized ）
+* molokai（https://github.com/tomasr/molokai ）
+* phd（http://www.vim.org/scripts/script.php?script_id=3139 ）
 
-在 .vimrc 中选用某个主题：
+To choose a color scheme in `.vimrc`:
 
 ```
-" 配色方案
+" Set color scheme
 set background=dark
 colorscheme solarized
 "colorscheme molokai
 "colorscheme phd
 ```
-其中，不同主题都有暗/亮色系之分，这样三种主题六种风格，久不久换一换，给你不一样的心情：
+Among them, many color themes have both a light and a dark version. This way you have 3 color schemes and 6 different feels. Switching between them once in a while gives you a whole different mood:
 <div align="center">
 <img src="https://github.com/yangyangwithgnu/use_vim_as_ide/blob/master/pics/solarized%20%E4%B8%BB%E9%A2%98%E9%A3%8E%E6%A0%BC.png" alt=""/><br />
-（solarized 主题风格）
+(solarized)
 </div>
 
-<h3 name="3.2">3.2 营造专注氛围</h3>
-如今的 UX 设计讲究的是内容至上，从 GNOME3 的变化就能看出。编辑器界面展示的应全是代码，不应该有工具条、菜单、滚动条浪费空间的元素，另外，编程是种精神高度集中的脑力劳动，不应出现闪烁光标、花哨鼠标这些分散注意力的东东。配置如下：
+<h3 name="3.2">3.2 Building a focused atmosphere</h3>
+Modern UX design focuses on the content, as we can obviously see in the changes in GNOME3. An editor should be all about code and it should not have toolbar, menus, scrollbar, or other elements that unnecessarily take up space. Other than that, programming is a highly concentrated work, distractive elements such as blinking and fancy cursor should also be disabled. The configuration is as follows:
 
 ```
-" 禁止光标闪烁
+" Disable cursor blinking
 set gcr=a:block-blinkon0
-" 禁止显示滚动条
+" Disable scrollbar
 set guioptions-=l
 set guioptions-=L
 set guioptions-=r
 set guioptions-=R
-" 禁止显示菜单和工具条
+" Disable menu and toolbar
 set guioptions-=m
 set guioptions-=T
 ```
 
-重启 vim 后效果如下：
+This is how vim looks like after vim restarts:
 <div align="center">
 <img src="https://github.com/yangyangwithgnu/use_vim_as_ide/blob/master/pics/%E5%8E%BB%E9%99%A4%E5%86%97%E4%BD%99%E7%AA%97%E5%8F%A3%E5%85%83%E7%B4%A0.png" alt=""/><br />
-（去除冗余窗口元素）
+（get rid of extraneous UI elements）
 </div>
 
-还容易分神？好吧，我们把 vim 弄成全屏模式。vim 自身无法实现全屏，必须借助第三方工具 wmctrl，一个控制窗口 XYZ 坐标、窗口尺寸的命令行工具。先自行安装 wmctrl，再在 .vimrc 中增加如下信息：
+Still distracted? Okay, let's make vim full screened. Vim cannot make itself full-screen so we have to rely on third-party tool, wmctrl, a CLI tool that controls the XYZ coordinates and window size. Install wmctrl and add the following to `.vimrc`.
 
 ```
-" 将外部命令 wmctrl 控制窗口最大化的命令行参数封装成一个 vim 的函数
+" package wmctrl's command to maximize windows as a vim function
 fun! ToggleFullscreen()
 	call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")
 endf
-" 全屏开/关快捷键
+" shortcut to toggle full screen
 map <silent> <F11> :call ToggleFullscreen()<CR>
-" 启动 vim 时自动全屏
+" start vim in full screen
 autocmd VimEnter * call ToggleFullscreen()
 ```
-上面是一段简单的 vimscript 脚本，外部命令 wmctrl 及其命令行参数控制将指定窗口 windowid（即，vim）全屏，绑定快捷键 F11 实现全屏/窗口模式切换（linux 下各 GUI 软件约定使用 F11 全屏，最好遵守约定），最后配置启动时自动全屏。
+The above is a simple vim script: using external command wmctrl and its parameters to maximize windows according to windowid; mapping F11 as a toggle between full-screen and windowed mode (in linux most GUI software use F11 to enable full screen so it is best for us to follow this convention); finally making vim start in full-screen mode.
 
-<h3 name="3.3">3.3 添加辅助信息</h3>
-去除了冗余元素让 vim 界面清爽多了，为那些实用辅助信息腾出了空间。光标当前位置、显示行号、高亮当前行/列等等都很有用：
+<h3 name="3.3">3.3 Add assistive information</h3>
+vim is now so much cleaner without those unnecessary elements. This makes space for useful assistive information. Current cursor location, line numbers, and row/column highlighting is very useful:
 
 ```
-" 总是显示状态栏
+" always show status line
 set laststatus=2
-" 显示光标当前位置
+" show current cursor location
 set ruler
-" 开启行号显示
+" show line number
 set number
-" 高亮显示当前行/列
+" highlight current row/column
 set cursorline
 set cursorcolumn
-" 高亮显示搜索结果
+" highlight search result
 set hlsearch
 ```
 
-效果如下：
+This is what we get:
 <div align="center">
 <img src="https://github.com/yangyangwithgnu/use_vim_as_ide/blob/master/pics/%E6%B7%BB%E5%8A%A0%E8%BE%85%E5%8A%A9%E4%BF%A1%E6%81%AF.png" alt=""/><br />
-（添加辅助信息）
+（With assistive information）
 </div>
 
-<h3 name="3.4">3.4 其他美化</h3>
-默认字体不好看，挑个自己喜欢的，前提是你得先安装好该字体。中文字体，我喜欢饱满方正的（微软雅黑），英文字体喜欢圆润的（Consolas），vim 无法同时使用两种字体，怎么办？有人制作发布了一款中文字体用微软雅黑、英文字体用 Consolas 的混合字体 —— yahei consolas hybrid 字体，号称最适合中国程序员使用的字体，效果非常不错（本文全文采用该字体）。在 .vimrc 中设置下：
+<h3 name="3.4">3.4 Other ways to beautify vim</h3>
+If you don't like the default font, pick one you like.
 
 ```
-" 设置 gvim 显示字体
+" set gvim display font
 set guifont=YaHei\ Consolas\ Hybrid\ 11.5
 ```
-其中，由于字体名存在空格，需要用转义符“\”进行转义；最后的 11.5 用于指定字体大小。
+This font is specially made to display Chinese and English together. If you do not expect to use Chinese in your source code, feel free to choose whatever font you prefer. I personally find Adobe's Source Code Pro enjoyable. (Added during translation, Haowen Liu)
+In this line, because the font name contains spaces, we need to place `\\` before the space. The 11.5 at the end is the font size.
 
-代码折行也不太美观，禁止掉：
+If you don't like code wrapping, you can disable it by:
 
 ```
-" 禁止折行
+" no wrapping
 set nowrap
 ```
 
-前面介绍的主题风格对状态栏不起作用，需要借助插件 Powerline（https://github.com/Lokaltog/vim-powerline ）美化状态栏，在 .vimrc 中设定状态栏主题风格：
+The theme introduced above does not work on the status bar. We need Powerline (https://github.com/Lokaltog/vim-powerline) to beautify it. To set status bar theme in `.vimrc`:
 
 ```
-" 设置状态栏主题风格
+" set status bar theme
 let g:Powerline_colorscheme='solarized256'
 ```
 
-效果如下：
+This is what we get:
 <div align="center">
 <img src="https://github.com/yangyangwithgnu/use_vim_as_ide/blob/master/pics/%E7%95%8C%E9%9D%A2%E7%BE%8E%E5%8C%96%E6%9C%80%E7%BB%88%E6%95%88%E6%9E%9C.png" alt=""/><br />
-（界面美化最终效果）
+（Final UI）
 </div>
-图中，中英文混合字体看着是不是很舒服哈；增强后的状态栏，不仅界面漂亮多了，而且多了好些辅助信息（所在函数名、文件编码格式、文件类型）。
+In the picture we see a much better font, more powerful status bar, and much more assistive information (current function name, file encoding, file type).
 
 <h2 name="4">4 代码分析</h2>
 阅读优秀开源项目源码是提高能力的重要手段，营造舒适、便利的阅读环境至关重要。
